@@ -18,9 +18,9 @@
   <g filter="url(#elementDepth)">
     <text 
       x="250" 
-      y="280" 
+      y="240" 
       font-family="Georgia, 'Times New Roman', serif" 
-      font-size="240" 
+      font-size="220" 
       font-weight="900" 
       font-style="italic" 
       letter-spacing="-10" 
@@ -30,25 +30,28 @@
     </text>
   </g>
 
-  <!-- أيقونة حقيبة التسوق (أعلى اليمين) -->
-  <g transform="translate(380, 80) scale(0.8)" filter="url(#elementDepth)">
-    <path d="M10 20 H40 L45 50 H5 L10 20 Z" fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
-    <path d="M18 20 C18 10, 32 10, 32 20" fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
-  </g>
+  <!-- الخط المنحني المائل الوسطي -->
+  <path d="M 100 280 Q 250 340 400 280" stroke="url(#goldGradient)" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.8" />
 
-  <!-- أيقونة تجميل - مرآة أو وردة (أعلى اليسار) -->
-  <g transform="translate(60, 80) scale(0.8)" filter="url(#elementDepth)">
+  <!-- مجموعة الأيقونات تحت الخط المنحني -->
+  
+  <!-- أيقونة التجميل (يسار) -->
+  <g transform="translate(130, 340) scale(1.1)" filter="url(#elementDepth)">
     <circle cx="25" cy="20" r="15" fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
-    <path d="M25 35 L25 50 M15 50 L35 50" fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
+    <path d="M25 35 L25 45 M17 45 L33 45" fill="none" stroke="url(#goldGradient)" stroke-width="3" stroke-linecap="round"/>
   </g>
 
-  <!-- أيقونة منتجات أطفال - لهّاية أو فيونكة (أسفل الوسط) -->
-  <g transform="translate(225, 380) scale(0.9)" filter="url(#elementDepth)">
+  <!-- أيقونة حقيبة التسوق (منتصف) -->
+  <g transform="translate(225, 335) scale(1.1)" filter="url(#elementDepth)">
+    <path d="M10 18 H40 L43 45 H7 L10 18 Z" fill="none" stroke="url(#goldGradient)" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M18 18 C18 10, 32 10, 32 18" fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
+  </g>
+
+  <!-- أيقونة منتجات الأطفال (يمين) -->
+  <g transform="translate(320, 340) scale(1.1)" filter="url(#elementDepth)">
     <circle cx="25" cy="15" r="12" fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
-    <path d="M13 25 Q25 45 37 25" fill="none" stroke="url(#goldGradient)" stroke-width="3"/>
-    <rect x="20" y="27" width="10" height="8" rx="2" fill="url(#goldGradient)"/>
+    <path d="M15 25 Q25 40 35 25" fill="none" stroke="url(#goldGradient)" stroke-width="3" stroke-linecap="round"/>
+    <rect x="20" y="27" width="10" height="6" rx="2" fill="url(#goldGradient)"/>
   </g>
 
-  <!-- خط منحني يربط العناصر السفلية -->
-  <path d="M 100 350 Q 250 430 400 350" stroke="url(#goldGradient)" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.6" />
 </svg>
