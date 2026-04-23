@@ -100,35 +100,36 @@
         .slider-dot { @apply w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all duration-300 backdrop-blur-sm border border-white/20; }
         .slider-dot.active { @apply bg-primary w-8 shadow-glow border-primary; }
 
-                /* --- كود مقاسات البراندات والمجموعات (نسخة مصغرة جداً) --- */
+                /* --- تنسيق اللوجوهات الدائرية المصغرة --- */
         
-        /* 1. كارت البراند (الدائري) */
         .filter-brand-card { 
-            @apply w-7 h-7 md:w-9 md:h-9 bg-white border border-slate-50 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 shrink-0 relative overflow-hidden; 
+            /* حجم الدائرة: w-10 للموبايل و w-12 للكمبيوتر */
+            @apply w-10 h-10 md:w-12 md:h-12 bg-white border border-slate-200 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-primary hover:shadow-sm shrink-0 relative overflow-hidden; 
         }
         
-        /* التحكم في حجم صورة اللوجو داخل الدائرة */
         .filter-brand-card img {
-            width: 30% !important; 
-            height: 30% !important;
+            /* حجم اللوجو داخل الدائرة: 60% ليترك مسافة بيضاء أنيقة حوله */
+            width: 60% !important; 
+            height: 60% !important;
             object-fit: contain !important;
         }
 
-        .filter-brand-card.active { @apply border-primary ring-2 ring-primary/10 bg-slate-50; }
-        
-        /* 2. كارت المجموعات (المربع) */
+        /* حالة اللوجو المختار */
+        .filter-brand-card.active { 
+            @apply border-primary ring-2 ring-primary/20 bg-slate-50 scale-95; 
+        }
+
+        /* تنسيق قسم المجموعات ليكون متناسقاً مع البراندات */
         .filter-line-card { 
-            @apply w-7 h-7 md:w-9 md:h-9 bg-white border border-slate-50 rounded-md flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 shrink-0; 
+            @apply w-10 h-10 md:w-12 md:h-12 bg-white border border-slate-200 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-primary shrink-0; 
         }
-
-        /* التحكم في حجم الصورة داخل المجموعات */
+        
         .filter-line-card img {
-            width: 30% !important;
-            height: 30% !important;
+            width: 60% !important;
+            height: 60% !important;
             object-fit: contain !important;
         }
-
-        .filter-line-card.active { @apply border-primary ring-2 ring-primary/10 bg-slate-50; }
+        
         
         /* Admin UI fixes */
         .admin-view-container { display: flex; flex-direction: column; width: 100%; min-height: calc(100vh - 64px); }
@@ -256,7 +257,8 @@
                 <!-- LUXURY BRANDS CONTAINER (Images Only) -->
                 <div id="brands-container" class="mt-4 md:mt-8 pt-4 md:pt-8 border-t border-slate-100 hidden">
                     <div class="flex items-center gap-2 mb-4 md:mb-6"><div class="w-2 h-8 bg-primary rounded-full"></div><h3 class="font-black text-slate-800 text-sm md:text-xl">اكتشف أرقى العلامات التجارية</h3></div>
-                    <div class="flex flex-wrap items-center justify-start gap-3 md:gap-5" id="brands-grid"></div>
+                    <div class="flex flex-wrap items-center justify-start gap-2 md:gap-3" id="brands-grid"></div>
+
                 </div>
 
                 <!-- LUXURY LINES CONTAINER (Images Only) -->
