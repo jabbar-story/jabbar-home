@@ -100,35 +100,17 @@
         .slider-dot { @apply w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all duration-300 backdrop-blur-sm border border-white/20; }
         .slider-dot.active { @apply bg-primary w-8 shadow-glow border-primary; }
 
-                /* --- تنسيق اللوجوهات الدائرية المصغرة --- */
+                /* Filters */
+        .filter-cat-btn { @apply px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all border-2 flex items-center justify-center whitespace-nowrap shrink-0 shadow-sm; }
+        .filter-cat-btn.active { @apply bg-slate-900 text-primary border-slate-900 shadow-md; }
+        .filter-cat-btn.inactive { @apply bg-white text-slate-600 border-slate-200 hover:border-slate-300; }
         
-        .filter-brand-card { 
-            /* حجم الدائرة: w-10 للموبايل و w-12 للكمبيوتر */
-            @apply w-10 h-10 md:w-12 md:h-12 bg-white border border-slate-200 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-primary hover:shadow-sm shrink-0 relative overflow-hidden; 
-        }
+        .filter-brand-card { @apply bg-white border border-slate-200 rounded-xl p-2 flex flex-col items-center justify-center cursor-pointer transition-all hover:border-primary hover:shadow-md text-center aspect-square; }
+        .filter-brand-card.active { @apply border-primary bg-primary/5 ring-2 ring-primary/20 shadow-md; }
         
-        .filter-brand-card img {
-            /* حجم اللوجو داخل الدائرة: 60% ليترك مسافة بيضاء أنيقة حوله */
-            width: 39% !important; 
-            height: 30% !important;
-            object-fit: contain !important;
-        }
+        .filter-line-card { @apply bg-white border border-slate-200 rounded-xl px-2 py-1.5 flex items-center gap-2 cursor-pointer transition-all hover:border-primary hover:bg-slate-50 text-right; }
+        .filter-line-card.active { @apply border-primary bg-slate-900 text-primary shadow-md; }
 
-        /* حالة اللوجو المختار */
-        .filter-brand-card.active { 
-            @apply border-primary ring-2 ring-primary/20 bg-slate-50 scale-95; 
-        }
-
-        /* تنسيق قسم المجموعات ليكون متناسقاً مع البراندات */
-        .filter-line-card { 
-            @apply w-10 h-10 md:w-12 md:h-12 bg-white border border-slate-200 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-primary shrink-0; 
-        }
-        
-        .filter-line-card img {
-            width: 30% !important;
-            height: 30% !important;
-            object-fit: contain !important;
-        }
         
         
         /* Admin UI fixes */
