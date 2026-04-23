@@ -100,17 +100,29 @@
         .slider-dot { @apply w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all duration-300 backdrop-blur-sm border border-white/20; }
         .slider-dot.active { @apply bg-primary w-8 shadow-glow border-primary; }
 
-                /* Filters */
-        .filter-cat-btn { @apply px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all border-2 flex items-center justify-center whitespace-nowrap shrink-0 shadow-sm; }
-        .filter-cat-btn.active { @apply bg-slate-900 text-primary border-slate-900 shadow-md; }
-        .filter-cat-btn.inactive { @apply bg-white text-slate-600 border-slate-200 hover:border-slate-300; }
-        
-        .filter-brand-card { @apply bg-white border border-slate-200 rounded-xl p-2 flex flex-col items-center justify-center cursor-pointer transition-all hover:border-primary hover:shadow-md text-center aspect-square; }
-        .filter-brand-card.active { @apply border-primary bg-primary/5 ring-2 ring-primary/20 shadow-md; }
-        
-        .filter-line-card { @apply bg-white border border-slate-200 rounded-xl px-2 py-1.5 flex items-center gap-2 cursor-pointer transition-all hover:border-primary hover:bg-slate-50 text-right; }
-        .filter-line-card.active { @apply border-primary bg-slate-900 text-primary shadow-md; }
+                /* ابحث عن هذا الكلاس في السطر 120 تقريباً وحدثه كالتالي */
+.filter-brand-card { 
+    @apply bg-white border border-slate-200 rounded-xl p-1 flex flex-col items-center justify-center cursor-pointer transition-all hover:border-primary hover:shadow-md text-center; 
+    width: 80px; /* تحديد عرض ثابت صغير للوجو */
+    height: 80px; /* تحديد ارتفاع ثابت للوجو */
+}
 
+        /* ابحث عن هذا الكلاس وحدثه */
+.filter-line-card { 
+    @apply bg-white border border-slate-200 rounded-lg px-3 py-1.5 flex items-center gap-2 cursor-pointer transition-all hover:border-primary hover:bg-slate-50 text-right text-xs; 
+}
+
+        #brands-grid img, #categories-container img {
+    max-width: 50px; /* تصغير حجم لوجو البراند */
+    height: auto;
+    object-fit: contain;
+}
+
+#categories-container .cat-item {
+    min-width: 70px;
+    text-align: center;
+    font-size: 11px;
+}
         
         
         /* Admin UI fixes */
