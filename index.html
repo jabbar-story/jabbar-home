@@ -1788,9 +1788,61 @@
         function saveSettings(e) { e.preventDefault(); const s = { name: document.getElementById('set-name').value, logo: document.getElementById('set-logo').value, phone: document.getElementById('set-phone').value, whatsapp: document.getElementById('set-whatsapp').value, facebook: document.getElementById('set-fb').value, instagram: document.getElementById('set-insta').value, locationUrl: document.getElementById('set-loc').value, branches: document.getElementById('set-branches').value }; db.ref('settings').set(s).then(()=>showToast('تم تحديث الإعدادات بنجاح','success')); }
 
         function renderAdminBanners() { const list = document.getElementById('banners-list-admin'); const bans = Object.values(state.banners); if(bans.length===0){ list.innerHTML = '<div class="col-span-full text-center py-10 bg-slate-50 rounded-2xl border border-slate-100 text-slate-400 font-bold">لا توجد بنرات</div>'; return; } list.innerHTML = bans.map(b => { const isVideo = b.img.match(/\.(mp4|webm|ogg)$/i); const yt = getYouTubeEmbed(b.img); let m = yt ? `<iframe src="${yt}" class="w-full h-32 object-cover rounded-xl" frameborder="0"></iframe>` : (isVideo ? `<video src="${b.img}" class="w-full h-32 object-cover rounded-xl bg-slate-900"></video>` : `<img src="${b.img}" class="w-full h-32 object-cover rounded-xl border border-slate-100">`); return `<div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm relative group hover:shadow-md transition-shadow">${m}<div class="mt-3 text-[10px] md:text-xs font-bold text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100"><span class="text-slate-400">توجيه:</span> ${b.brand||'بدون'} <br> <span class="text-slate-400">المدة:</span> ${b.duration||3} ثواني</div><button onclick="deleteBanner('${b.id}')" class="absolute top-4 right-4 bg-red-500/80 hover:bg-red-600 text-white w-8 h-8 rounded-lg flex justify-center items-center backdrop-blur-sm transition-colors shadow-sm"><i class="ph-bold ph-trash text-sm"></i></button></div>`; }).join(''); }
-        function saveBanner(e) { e.preventDefault(); const id = generateId('BAN'); const b = { id: id, img: document.getElementById('ban-img').value, duration: document.getElementById('ban-duration').value, brand: document.getElementById('ban-brand').value }; db.ref('banners/'+id).set(b).then(()=>{document.getElementById('banner-form').reset(); showToast('تم النشر بنجاح','success');}); }
+        function saveBanner(e) { 
+    e.preventDefault(); 
+    const id = generateId('BAN'); 
+    const b = { 
+        id: id, 
+        img: document.getElementById('ban-img').value, 
+        duration: document.getElementById('ban-duration').value, 
+        targetType: document.getElementById('ban-target-type').value, 
+        targetValue: document.getElementById('ban-target-value').value 
+    }; 
+    db.ref('banners/'+id).set(b).then(()=>{
+        document.getElementById('banner-form').reset(); 
+        document.getElementById('ban-target-value-container').classList.add('hidden'); // إخفاء الحقل بعد الحفظ
+        showToast('تم النشر بنجاح','success');
+    }); 
+        }
+        
         function deleteBanner(id) { if(confirm('هل تريد مسح هذا البنر؟')) db.ref('banners/'+id).remove().then(()=>showToast('تم المسح','success')); }
+        function toggleBannerTargetInput() {
+    const type = document.getElementById('ban-target-type').value;
+    const container = document.getElementById('ban-target-value-container');
+    const label = document.getElementById('ban-target-label');
+    const datalist = document.getElementById('ban-targets-datalist');
+    const input = document.getElementById('ban-target-value');
 
+    input.value = ''; 
+    datalist.innerHTML = ''; 
+
+    if (!type) {
+        container.classList.add('hidden');
+        return;
+    }
+
+    container.classList.remove('hidden');
+    let options = new Set();
+
+    if (type === 'brand') {
+        label.innerText = 'اختر البراند';
+        Object.values(state.products).forEach(p => { if (p.brand) options.add(p.brand); });
+    } else if (type === 'category') {
+        label.innerText = 'اختر القسم';
+        Object.values(state.products).forEach(p => { if (p.category) options.add(p.category); });
+    } else if (type === 'line') {
+        label.innerText = 'اختر اللين';
+        Object.values(state.products).forEach(p => { if (p.line) options.add(p.line); });
+    } else if (type === 'product') {
+        label.innerText = 'ابحث بالاسم أو الباركود';
+        Object.values(state.products).forEach(p => { if (p.code) options.add(p.code); });
+    }
+
+    options.forEach(opt => {
+        datalist.innerHTML += `<option value="${opt}"></option>`;
+    });
+        }
+        
         function generateReport() { const start = document.getElementById('rep-start').value; const end = document.getElementById('rep-end').value; if(!start || !end) return showToast('الرجاء تحديد النطاق الزمني','error'); const targetOrders = Object.values(state.orders).filter(o => o.orderDate >= start && o.orderDate <= end && o.status === 'تم التسليم'); const total = targetOrders.reduce((s,o)=>s+o.total, 0); document.getElementById('rep-total-sales').innerHTML = `${total} <span class="text-xs md:text-sm font-bold text-slate-600">ج.م</span>`; document.getElementById('rep-order-count').innerText = targetOrders.length; document.getElementById('rep-orders-body').innerHTML = targetOrders.map(o=>`<tr class="hover:bg-slate-50"><td class="px-4 py-3 font-black text-slate-800">${o.id}</td><td class="px-4 py-3 font-bold text-slate-500">${o.date}</td><td class="px-4 py-3 font-black text-primaryDark">${o.total} ج</td></tr>`).join(''); document.getElementById('report-results').classList.remove('hidden'); }
 
         function toggleProductAvailability(id, currentStatus) { db.ref('products/' + id).update({ isAvailable: !currentStatus }).then(() => showToast(currentStatus ? 'المنتج الآن غير متوفر' : 'المنتج متاح للبيع', 'success')); }
